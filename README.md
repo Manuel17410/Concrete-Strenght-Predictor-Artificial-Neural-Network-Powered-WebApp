@@ -1,7 +1,7 @@
-## Concrete Strenght Predictor: Artificial Neural Network Powered Web-App with Docker Deployment
+# Concrete Strenght Predictor: Artificial Neural Network Powered Web-App with Docker Deployment
 
 
-# How to run the website using Docker:
+## How to run the website using Docker:
 
 The website can be run using Docker or without it. 
 To run it with docker the following steps need to be taken.
@@ -26,7 +26,7 @@ docker run -d -p 8000:8000 concrete-strength-predictor
 
 http://127.0.0.1:8000
 
-# How to run the website without Docker:
+## How to run the website without Docker:
 
 Follow these steps if Docker is not installed on your system:
 
@@ -55,3 +55,5 @@ uvicorn main:app --host 127.0.0.1 --port 8000
 6 - Access the Web App: Open your browser and go to: 
 
 http://127.0.0.1:8000
+
+## Website Interface
