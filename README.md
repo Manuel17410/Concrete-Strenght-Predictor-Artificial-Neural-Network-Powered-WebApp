@@ -58,4 +58,5 @@ http://127.0.0.1:8000
 
 ## Website Interface
 
-![Example Image](image/"Concrete Strength Predictor".png)
+![Example Image](image/Concrete%20Strength%20Predictor.png)
+
