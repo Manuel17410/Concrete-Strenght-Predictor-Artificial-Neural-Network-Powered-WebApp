@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concrete Strength Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://www.europosters.de/concrete-wall-background-texture-f91468598');
+            background-size: cover;
+            background-position: center center;
+            font-family: Arial, sans-serif;
+            padding-top: 50px;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: black;
+            font-weight: bold;
+        }
+        .info-text {
+            font-size: 14px;
+            color: gray;
+            margin-bottom: 20px;
+        }
+        .info-text ul {
+            padding-left: 20px;
+        }
+        .info-text ul li {
+            margin-bottom: 5px;
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            background-color: gray;
+            border: none;
+            border-radius: 5px;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: darkgray;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Concrete Strength Predictor</h1>
+        <div class="info-text">
+            <p>Please ensure your inputs are within the following ranges:</p>
+            <ul>
+                <li><strong>Cement:</strong> 102 - 540 kg/m³</li>
+                <li><strong>Blast Furnace Slag:</strong> 0 - 359 kg/m³</li>
+                <li><strong>Fly Ash:</strong> 0 - 200 kg/m³</li>
+                <li><strong>Water:</strong> 121 - 247 kg/m³</li>
+                <li><strong>Superplasticizer:</strong> 0 - 32 kg/m³</li>
+                <li><strong>Coarse Aggregate:</strong> 801 - 1145 kg/m³</li>
+                <li><strong>Fine Aggregate:</strong> 549 - 992 kg/m³</li>
+                <li><strong>Age:</strong> 1 - 365 days</li>
+            </ul>
+        </div>
+        <form action="/predict" method="post">
+            <!-- Cement -->
+            <div class="mb-3">
+                <label for="cement">Cement (kg/m³):</label>
+                <input id="cement" class="form-control" type="number" name="cement" step="0.01" required>
+            </div>
+            <!-- Blast Furnace Slag -->
+            <div class="mb-3">
+                <label for="slag">Blast Furnace Slag (kg/m³):</label>
+                <input id="slag" class="form-control" type="number" name="blast_furnace_slag" step="0.01" required>
+            </div>
+            <!-- Fly Ash -->
+            <div class="mb-3">
+                <label for="fly_ash">Fly Ash (kg/m³):</label>
+                <input id="fly_ash" class="form-control" type="number" name="fly_ash" step="0.01" required>
+            </div>
+            <!-- Water -->
+            <div class="mb-3">
+                <label for="water">Water (kg/m³):</label>
+                <input id="water" class="form-control" type="number" name="water" step="0.01" required>
+            </div>
+            <!-- Superplasticizer -->
+            <div class="mb-3">
+                <label for="superplasticizer">Superplasticizer (kg/m³):</label>
+                <input id="superplasticizer" class="form-control" type="number" name="superplasticizer" step="0.01" required>
+            </div>
+            <!-- Coarse Aggregate -->
+            <div class="mb-3">
+                <label for="coarse_aggregate">Coarse Aggregate (kg/m³):</label>
+                <input id="coarse_aggregate" class="form-control" type="number" name="coarse_aggregate" step="0.01" required>
+            </div>
+            <!-- Fine Aggregate -->
+            <div class="mb-3">
+                <label for="fine_aggregate">Fine Aggregate (kg/m³):</label>
+                <input id="fine_aggregate" class="form-control" type="number" name="fine_aggregate" step="0.01" required>
+            </div>
+            <!-- Age -->
+            <div class="mb-3">
+                <label for="age">Age (days):</label>
+                <input id="age" class="form-control" type="number" name="age" min="1" step="1" required>
+            </div>
+            <!-- Submit Button -->
+            <button class="btn btn-primary" type="submit">Predict</button>
+        </form>
+        {% if result %}
+            <div class="result">
+                Predicted Concrete Strength: {{ result }} MPa
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+
+
+
+

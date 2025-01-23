@@ -1,77 +1,75 @@
 import joblib
 import numpy as np
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, Form
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 import uvicorn
 
-# trained neural network model and scaler
+# Load the trained model and scaler
 model = joblib.load('app/model_3.joblib')
 scaler = joblib.load('app/scaler.joblib')
 
 app = FastAPI()
 
-@app.get('/')
-def read_root():
+# Set up Jinja2 templates
+templates = Jinja2Templates(directory="app/templates")
 
+# Serve static files (if any, like CSS, JS, or images)
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
+
+@app.get("/", response_class=HTMLResponse)
+async def read_form(request: Request):
     """
-    Root endpoint to verify the API is running.
+    Render the prediction form.
     """
+    return templates.TemplateResponse("index.html", {"request": request})
 
-    return {'message': 'Concrete Compressive Strength Prediction API.2'}
 
-@app.post('/predict')
-def predict(data: dict):
+@app.post("/predict", response_class=HTMLResponse)
+async def predict(
+    request: Request,
+    cement: float = Form(...),
+    blast_furnace_slag: float = Form(...),
+    fly_ash: float = Form(...),
+    water: float = Form(...),
+    superplasticizer: float = Form(...),
+    coarse_aggregate: float = Form(...),
+    fine_aggregate: float = Form(...),
+    age: int = Form(...),
+):
     """
-    Predicts the compressive strength of concrete based on input features.
-
-    Args:
-        data (dict): A dictionary containing the features to predict.
-        Example: 
-        {
-            "features": {
-                "Cement (component 1)(kg in a m^3 mixture)": 540.0,
-                "Blast Furnace Slag (component 2)(kg in a m^3 mixture)": 0.0,
-                "Fly Ash (component 3)(kg in a m^3 mixture)": 0.0,
-                "Water  (component 4)(kg in a m^3 mixture)": 162.0,
-                "Superplasticizer (component 5)(kg in a m^3 mixture)": 2.5,
-                "Coarse Aggregate  (component 6)(kg in a m^3 mixture)": 1040.0,
-                "Fine Aggregate (component 7)(kg in a m^3 mixture)": 676.0,
-                "Age (day)": 28
-            }
-        }
-        
-    Returns:
-        dict: A dictionary containing the predicted compressive strength
+    Handle prediction requests and return the result.
     """
+    # Prepare the input features for prediction
+    input_features = np.array([
+        cement, blast_furnace_slag, fly_ash, water, 
+        superplasticizer, coarse_aggregate, fine_aggregate, age
+    ]).reshape(1, -1)
 
-    # Print the keys of the features dictionary to inspect the available keys
-    print(data['features'].keys())
+    # Scale the features
+    scaled_features = scaler.transform(input_features)
 
-    # Extract features from the input data
-    input_features = [
-        data['features']['Cement (component 1)(kg in a m^3 mixture)'],
-        data['features']['Blast Furnace Slag (component 2)(kg in a m^3 mixture)'],
-        data['features']['Fly Ash (component 3)(kg in a m^3 mixture)'],
-        data['features']['Water  (component 4)(kg in a m^3 mixture)'],
-        data['features']['Superplasticizer (component 5)(kg in a m^3 mixture)'],
-        data['features']['Coarse Aggregate  (component 6)(kg in a m^3 mixture)'],
-        data['features']['Fine Aggregate (component 7)(kg in a m^3 mixture)'],
-        data['features']['Age (day)']
-    ]
-
-    # Extract features from the input data
-    features = np.array(input_features).reshape(1, -1)  # Ensure it's in the correct shape
-
-    # Scale the input features using the same scaler used during training
-    scaled_features = scaler.transform(features)
-    
-    # Make the prediction using the model
+    # Predict the strength
     prediction = model.predict(scaled_features)[0]
-    
-    # Since the prediction is a continuous value (for regression), return it directly
-    return {'predicted_strength': float(prediction)}
+
+    # Render the prediction result on the same page
+    return templates.TemplateResponse(
+        "index.html",
+        {
+            "request": request,
+            "result": round(float(prediction), 2),  # Round to 2 decimal places
+        },
+    )
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
+
+
+
+
 
 
 
