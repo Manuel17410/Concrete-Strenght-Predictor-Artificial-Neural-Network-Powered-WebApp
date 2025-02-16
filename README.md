@@ -8,19 +8,21 @@ In this project, a fully functional website was developed using HTML, integrated
 
 git clone https://github.com/Manuel17410/Concrete-Strength-Predictor-ANN-Powered-Web-App-with-Docker-Deployment.git
 
-2- Navigate to the Project Directory:
+2- Navigate to the Project Directory and open it in VSC:
 
 cd Concrete-Strength-Predictor-ANN-Powered-Web-App-with-Docker-Deployment
 
-3- Build the Docker Image:
+3 - Install Dependencies: Use the requirements.txt file to install the required libraries: pip install -r requirements.txt
+
+4- Build the Docker Image:
 
 docker build -t concrete-strength-predictor .
 
-4- Run the Docker Container:
+5- Run the Docker Container:
 
 docker run -d -p 8000:8000 concrete-strength-predictor
 
-5- Access the Web App: Open your browser and go to:
+6- Access the Web App: Open your browser and go to:
 
 http://127.0.0.1:8000
 
