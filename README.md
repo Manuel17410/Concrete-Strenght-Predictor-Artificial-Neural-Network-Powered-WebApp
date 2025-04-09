@@ -2,6 +2,14 @@
 
 In this project, a fully functional website was developed using HTML, integrated with a FastAPI backend, to predict the compressive strength of concrete. The prediction model is powered by artificial neural networks (ANN) and was deployed using Docker for seamless containerization and cross-platform compatibility.
 
+## Video Demonstration of the App on YouTube
+
+To give you a quick overview of how the app works, I’ve created a demonstration video. While setting up the app locally can take a few minutes and sometimes lead to dependency issues, this video allows you to experience the website without any setup.
+
+[![Watch the Demo](https://img.youtube.com/vi/rNWj6oO8w_I/0.jpg)](https://youtube.com/shorts/rNWj6oO8w_I?si=R_ET-zTJvY3SbOwn)
+
+Additionally, I am actively working on hosting the app on a cloud platform to make it even easier to access.
+
 ## How to run the website using Docker:
 
 1- Clone the Repository:
