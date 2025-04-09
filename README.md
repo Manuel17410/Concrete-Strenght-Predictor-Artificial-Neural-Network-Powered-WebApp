@@ -30,23 +30,11 @@ http://127.0.0.1:8000
 
 Follow these steps if Docker is not installed on your system:
 
-1 - Clone the Repository:
+1 - Download the repository
 
-git clone https://github.com/Manuel17410/Concrete-Strength-Predictor-ANN-Powered-Web-App-with-Docker-Deployment.git
+2 - Go to the repo folder in your computer, and open VSC (Right click, "In Terminal offnen", and then write code .)
 
-2 - Navigate to the Project Directory:
-
-cd Concrete-Strength-Predictor-ANN-Powered-Web-App-with-Docker-Deployment
-
-3 - Create and Activate a Virtual Environment (Optional but Recommended):
-
-python -m venv venv
-source venv/bin/activate  # On Linux/MacOS
-venv\Scripts\activate     # On Windows
-
-4 - Install Dependencies: Use the requirements.txt file to install the required libraries:
-
-pip install -r requirements.txt
+3 - Write  -    pip install -r requirements.txt   - in the terminal
 
 5 - Run the Application: Start the FastAPI application: 
 
