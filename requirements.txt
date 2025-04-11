@@ -8,3 +8,4 @@ scikit-learn
 joblib
 uvicorn
 fastapi
+Jinja2
