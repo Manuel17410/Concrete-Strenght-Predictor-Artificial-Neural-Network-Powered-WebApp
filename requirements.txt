@@ -9,3 +9,6 @@ joblib
 uvicorn
 fastapi
 Jinja2
+python-multipart
+aiofiles
+starlette
