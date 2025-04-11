@@ -4,7 +4,7 @@ In this project, a fully functional website was developed using HTML, integrated
 
 ## Link to the application:
 
-https://end-to-end-used-car-prediction-website.onrender.com
+https://concrete-strength-predictor.onrender.com/
 
 ## Video Demonstration of the App on YouTube (In case the link above does not work)
 
