@@ -1,6 +1,6 @@
 # Concrete Strenght Predictor: Artificial Neural Network Powered Web-App with Docker Deployment
 
-In this project, a fully functional website was developed using HTML, integrated with a FastAPI backend, to predict the compressive strength of concrete. The prediction model is powered by artificial neural networks (ANN) and was deployed using Docker for seamless containerization and cross-platform compatibility.
+Fully functional website was developed using HTML, integrated with a FastAPI backend, to predict the compressive strength of concrete. The prediction model runs on an artificial neural network (ANN) and was deployed with Docker to make it easy to run anywhere, no matter the platform.
 
 ## Link to the application:
 
